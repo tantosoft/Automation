@@ -1,3 +1,6 @@
+# Ruby script to test the load balancer
+# ./testlb.rb -u http://10.0.15.11 -n 100
+
 require "net/http"
 require "uri"
 require 'optparse'
@@ -7,17 +10,17 @@ require 'pp'
 hash_options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: your_app [options]"
-  opts.on('-u', '--hostname', "Specify the name of the host") do |v|
+  opts.on('-u', "Specify the name of the host") do |v|
     hash_options[:hostname] = v
   end
-  opts.on('-n', '--requests', "Specify the numbeer of requests") do |v|
+  opts.on('-n', "Specify the numbeer of requests") do |v|
     hash_options[:numberOfRequests] = v
   end
-  opts.on('-v', '--version', 'Display the version') do
+  opts.on('-v', 'Display the version') do
     puts "VERSION 1"
     exit
   end
-  opts.on('-h', '--help', 'Display this help') do
+  opts.on('-h', 'Display this help') do
     puts opts
     exit
   end

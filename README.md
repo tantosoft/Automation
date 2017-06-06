@@ -41,10 +41,10 @@ This will start the VM, and run the provisioning playbook (on the first VM start
 
 To run ansible manually inside the project directory, I have included ansible.cfg file which links the generated host file.
 
-Usage of ruby script to test load balancer -u, --hostname Specify the name of the host -n, --requests Specify the number of requests -v, --version Display the version -h, --help Display this help
+Usage of ruby script to test load balancer -u Specify the name of the host, -n Specify the number of requests, -v Display the version, -h Display this help.
 
-    $ ruby testlb.rb -u "10.0.15.11" -n 100 web1 34 web2 33 web3 33
+    $ ruby testlb.rb -u "10.0.15.11" -n 100
 
-Please note that order of supplied arguments cannot be changed. That means it is always host name(-u) followed by number of requests(-n)
+Please note that order of supplied arguments cannot be changed. It should be host name(-u) followed by number of requests(-n)
 
 See LICENSE for credits.
