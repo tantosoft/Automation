@@ -16,7 +16,7 @@ In this project, I focused on making dynamic inventory, N machines, reusable tas
 
 **Ansible roles**:
 
-    common - holds tasks and handlers which is common to both load balancer and web server. It installs nginx and git
+    common - holds tasks and handlers which is common to both load balancer and web server. It installs ufw firewall, nginx and git, and configures the firewall on each virtualbox to allow ssh on port 22 and http on port 80, any other traffic is dropped.
     lb - task and handlers for loadbalancers. It also has config template for ngnix loadbalancer setup (roundrobin).
     web - task and handlers for web servers. It also has sample html and config template for nginx webserver setup.
 
