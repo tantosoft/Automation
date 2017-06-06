@@ -1,18 +1,20 @@
-Automation: This project uses Vagrant to create 3 virtualbox ubuntu web servers and configure loadbalancer on another virtualbox machine. Ansible is used for Provisioning the 4 virtualbox machines.
+# Automation: 
+
+### This project uses Vagrant to create 3 virtualbox ubuntu web servers and configure a loadbalancer on another virtualbox machine. Ansible is used for Provisioning the 4 virtualboxes.
 
 The project was developed and executed on a Ubuntu 16.04 Host with Virtualbox, Vagrant and Ansible packages installed. To install this packages on Ubuntu simply type:
 
-sudo apt-get install virtualbox vagrant ansible
+    sudo apt-get install virtualbox vagrant ansible
 
 and it will install all other dependecies required by them. The installation of the packages on other operating systems is out of the scope of this project.
 
-In this project, I focused more on making solution more generic (dynamic inventory, N machines, reusable tasks, config templates, maximum usage of Ansible facts, separation of roles).
+In this project, I focused on making dynamic inventory, N machines, reusable tasks, config templates, maximum usage of Ansible facts, separation of roles.
 
-Vagrantfile: The Vagrant script creates 3 number of virtual ubuntu boxes to be used as web servers and 1 extra box to be used as load balancer. Load balancer IP: 10.0.15.11, Webservers ip addresses from 10.0.15.21, 22, 23.
+**Vagrantfile**: The Vagrant script creates 3 virtual ubuntu boxes to be used as web servers and 1 extra ubuntu box to be used as load balancer. Load balancer IP: 10.0.15.11, Webservers IP addresses from 10.0.15.21, 22, 23.
 
-Ansible: The inventory along with right group is dynamically generated. I have also supplied ansible.cfg file which links to generated inventory and useful to run ansible locally. Used roles to have it organized and to have reusable pieces of code.
+**Ansible**: The inventory along with right group is dynamically generated. I have also supplied ansible.cfg file which links to generated inventory and useful to run ansible locally. Used roles to have it organized and to have reusable pieces of code.
 
-Ansible roles:
+**Ansible roles**:
 
     common - holds tasks and handlers which is common to both load balancer and web server. It installs nginx and git
     lb - task and handlers for loadbalancers. It also has config template for ngnix loadbalancer setup (roundrobin).
@@ -24,26 +26,25 @@ Ansible playbook pb_lb provisions the load balancer and also updates the config 
 
 During production deployment of web sites, I am aware that one can use pre tasks in ansible to bring out one node at a time from load balancer, deploy web application on that node and after deployment, add the node back to loadbalancer. So that one can do rolling deployment, with one node at a time with zero downtime for customers.
 
-Test the loadbalancer
-To test the load balancer, testlb.rb file is included which sends N requests to loadbalanced host and reads the host name (from response header) and stores the count of different hosts it has received response from.
+**Test the loadbalancer**: To test the load balancer, testlb.rb file is included which sends N requests to loadbalanced host and reads the host name (from response header) and stores the count of different hosts it has received response from.
 
-How to run:
-$ git clone https://github.com/tantosoft/Automation.git
+**How to run**:
 
-$ cd Automation
-
-$ vagrant up
+    $ git clone https://github.com/tantosoft/Automation.git
+    $ cd Automation
+    $ vagrant up
 
 This will start the VM, and run the provisioning playbook (on the first VM startup). To re-run a playbook on an existing VM, just run:
 
-$ vagrant provision
-
-(optional) $ ansible-playbook pb_web.yml
+    $ vagrant provision
+    (optional) $ ansible-playbook pb_web.yml
 
 To run ansible manually inside the project directory, I have included ansible.cfg file which links the generated host file.
 
 Usage of ruby script to test load balancer -u, --hostname Specify the name of the host -n, --requests Specify the number of requests -v, --version Display the version -h, --help Display this help
 
-$ ruby testlb.rb -u "10.0.15.11" -n 100 web1 34 web2 33 web3 33
+    $ ruby testlb.rb -u "10.0.15.11" -n 100 web1 34 web2 33 web3 33
 
 Please note that order of supplied arguments cannot be changed. That means it is always host name(-u) followed by number of requests(-n)
+
+See LICENSE for credits.
