@@ -34,17 +34,21 @@ During production deployment of web sites, I am aware that one can use pre tasks
     $ cd Automation
     $ vagrant up
 
-This will start the VM, and run the provisioning playbook (on the first VM startup). To re-run a playbook on an existing VM, just run:
+This will start the VM, and run the provisioning playbook (on the first VM startup).
+
+After the installation you can open your favorite web browser and point it to http://10.0.15.11. If you reload the same page you'll see the page served from any of the 3 web servers behind the load balancer.
+
+To re-run a playbook on an existing VM, just run:
 
     $ vagrant provision
     (optional) $ ansible-playbook pb_web.yml
 
 To run ansible manually inside the project directory, I have included ansible.cfg file which links the generated host file.
 
-Usage of ruby script to test load balancer -u Specify the name of the host, -n Specify the number of requests, -v Display the version, -h Display this help.
+Usage of ruby script to test load balancer: -u Specify the name of the host, -n Specify the number of requests, -v Display the version, -h Display this help.
 
-    $ ruby testlb.rb -u "10.0.15.11" -n 100
+    $ ruby testlb.rb -u "10.0.15.11" -n 1000
 
-Please note that order of supplied arguments cannot be changed. It should be host name(-u) followed by number of requests(-n)
+Please note that order of supplied arguments cannot be changed. It should be host name(-u) followed by number of requests(-n). The result of running the script is the total number of pages served by each of the web servers behind the load balancer: web1 334, web2 333, web3 333.
 
 See LICENSE for credits.
