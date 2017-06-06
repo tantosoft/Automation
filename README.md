@@ -1,6 +1,6 @@
 # Automation: 
 
-### This project uses Vagrant to create 3 virtualbox ubuntu web servers and configure loadbalancer on another virtualbox machine. Ansible is used for Provisioning the 4 virtualbox machines.
+### This project uses Vagrant to create 3 virtualbox ubuntu web servers and configure a loadbalancer on another virtualbox machine. Ansible is used for Provisioning the 4 virtualboxes.
 
 The project was developed and executed on a Ubuntu 16.04 Host with Virtualbox, Vagrant and Ansible packages installed. To install this packages on Ubuntu simply type:
 
@@ -8,9 +8,9 @@ The project was developed and executed on a Ubuntu 16.04 Host with Virtualbox, V
 
 and it will install all other dependecies required by them. The installation of the packages on other operating systems is out of the scope of this project.
 
-In this project, I focused more on making solution more generic (dynamic inventory, N machines, reusable tasks, config templates, maximum usage of Ansible facts, separation of roles).
+In this project, I focused on making dynamic inventory, N machines, reusable tasks, config templates, maximum usage of Ansible facts, separation of roles.
 
-**Vagrantfile**: The Vagrant script creates 3 number of virtual ubuntu boxes to be used as web servers and 1 extra box to be used as load balancer. Load balancer IP: 10.0.15.11, Webservers ip addresses from 10.0.15.21, 22, 23.
+**Vagrantfile**: The Vagrant script creates 3 virtual ubuntu boxes to be used as web servers and 1 extra ubuntu box to be used as load balancer. Load balancer IP: 10.0.15.11, Webservers IP addresses from 10.0.15.21, 22, 23.
 
 **Ansible**: The inventory along with right group is dynamically generated. I have also supplied ansible.cfg file which links to generated inventory and useful to run ansible locally. Used roles to have it organized and to have reusable pieces of code.
 
@@ -46,3 +46,5 @@ Usage of ruby script to test load balancer -u, --hostname Specify the name of th
     $ ruby testlb.rb -u "10.0.15.11" -n 100 web1 34 web2 33 web3 33
 
 Please note that order of supplied arguments cannot be changed. That means it is always host name(-u) followed by number of requests(-n)
+
+See LICENSE for credits.
