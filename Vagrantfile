@@ -5,8 +5,7 @@ MEMORY = 256
 ADMIN_USER = "vagrant"
 ADMIN_PASSWORD = "vagrant"
 VM_VERSION= "ubuntu/trusty64"
-#VM_VERSION= "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-VAGRANT_VM_PROVIDER = "virtualbox"
+VM_PROVIDER = "virtualbox"
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -25,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.hostname = "web#{i}"
         node.vm.network :private_network, ip: "10.0.15.2#{i}"
         node.vm.network "forwarded_port", guest: 80, host: "808#{i}"
-        node.vm.provider VAGRANT_VM_PROVIDER do |vb|
+        node.vm.provider VM_PROVIDER do |vb|
           vb.memory = MEMORY
         end
 
@@ -51,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         lb_config.vm.hostname = "lb"
         lb_config.vm.network :private_network, ip: "10.0.15.11"
         lb_config.vm.network "forwarded_port", guest: 80, host: 8011
-        lb_config.vm.provider VAGRANT_VM_PROVIDER do |vb|
+        lb_config.vm.provider VM_PROVIDER do |vb|
           vb.memory = MEMORY
         end
         lb_config.vm.provision "ansible" do |ansible|

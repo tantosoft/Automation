@@ -1,3 +1,4 @@
+# Playbook for the load balancer
 ---
 - hosts: loadbalancers
   sudo: True

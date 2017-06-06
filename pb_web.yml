@@ -1,3 +1,4 @@
+# Playbook for the web servers
 ---
 - hosts: webservers
   sudo: True
