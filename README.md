@@ -4,7 +4,7 @@
 
 The project was developed and executed on a Ubuntu 16.04 Host with Virtualbox, Vagrant and Ansible packages installed. To install this packages on Ubuntu simply type:
 
-    sudo apt-get install virtualbox vagrant ansible
+    $ sudo apt-get install virtualbox vagrant ansible
 
 and it will install all other dependecies required by them. The installation of the packages on other operating systems is out of the scope of this project.
 
